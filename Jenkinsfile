@@ -8,11 +8,11 @@ pipeline {
         //NEW_VERSION = '1.0.0'
         //SERVER_CREDENTIALS = credentials('//use reference or id of the credential created on jenkins')
     //}
-    //tools { //access build tools for the project
+    tools { //access build tools for the project
         //maven '//provide name installation in the jenkins server'
-        //gradle 'Gradle'
+        gradle 'Gradle'
         //jdk
-    //}
+    }
     //parameters{
         //type(name: '', defaultValue: '', description: '')
         //string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
@@ -101,10 +101,10 @@ pipeline {
         stage ("run backend") {
             steps {
                 echo 'executing gradle...'
-                withGradle() {
+                //withGradle() {
                     //sh 'gradle wrapper --gradle-version  6.9.1'
-                    sh './gradlew -v'
-                }
+                sh './gradlew -v'
+                //}
             }
         }
     }

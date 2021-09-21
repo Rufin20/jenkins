@@ -104,6 +104,7 @@ pipeline {
                 //withGradle() {
                     //sh 'gradle wrapper --gradle-version  6.9.1'
                 sh './gradlew -v'
+                echo $?
                 //}
             }
         }

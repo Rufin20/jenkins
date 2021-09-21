@@ -9,7 +9,7 @@ pipeline {
         //SERVER_CREDENTIALS = credentials('//use reference or id of the credential created on jenkins')
     //}
     tools { //access build tools for the project
-        maven 'Maven' //provide name installation in the jenkins server
+        maven 'Marven 3.8.2' //provide name installation in the jenkins server
         gradle 'Gradle'
         //jdk
     }

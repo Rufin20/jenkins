@@ -1,5 +1,5 @@
 //CODE_CHANGES = getGitChanges()
-//def gv
+def gv
 
 pipeline {
 
@@ -13,57 +13,57 @@ pipeline {
         gradle 'Gradle'
         //jdk
     }
-    //parameters{
+    parameters{
         //type(name: '', defaultValue: '', description: '')
-        //string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
-        //choice(name: 'VERSION', choices: ['1.0.0', '1.1.0', '1.1.1'], description: 'version to deploy in prod')
-        //booleanParam(name: 'executeTests', defaultValue: true, description: '')
+        string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
+        choice(name: 'VERSION', choices: ['1.0.0', '1.1.0', '1.1.1'], description: 'version to deploy in prod')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
     //}
     stages {
 
-        //stage("init") {
+        stage("init") {
             
-            //steps {
-              //  script {
-                //    gv = load "script.groovy"
-               // }
-           // }
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
 
 
         stage("build") {
             
-            //when {
-              //  expression {
-                //    BRANCH_NAME == 'dev' && CODE_CHANGES == 'true'
-                //}
-            //}
+            when {
+                expression {
+                    BRANCH_NAME == 'dev' && CODE_CHANGES == 'true'
+                }
+            }
 
             steps {
                 echo 'building the application ..'
                 //echo "building the application version ${NEW_VERSION}"
-                //sh "mvn install" //possible only if the tool maven is defined in tools 
+                sh "mvn install" //possible only if the tool maven is defined in tools 
 
-                //script {
-                    //gv.buildApp()
-                //}
+                script {
+                    gv.buildApp()
+                }
             }
         }
 
         stage("test") {
 
-               //when {
-                //expression {
-                    //BRANCH_NAME == 'dev'
-                    //params.executeTests
-               // }
-            //}
+               when {
+                expression {
+                    BRANCH_NAME == 'dev'
+                    params.executeTests
+                }
+               }
 
             steps {
                 echo 'testing the application ...'
 
-                //script{
-                    //gv.testApp()
-               // }
+                script{
+                    gv.testApp()
+                }
             }
         }
 
@@ -81,9 +81,9 @@ pipeline {
                     //sh "scp file.dot ${USER} ${PWD}"
                 //}
 
-                //script {
-                    //gv.deployApp()
-               // }
+                script {
+                    gv.deployApp()
+                }
 
             }
         }
@@ -98,16 +98,16 @@ pipeline {
             }
         }
     
-        stage ("run backend") {
-            steps {
-                echo 'executing gradle...'
+        //stage ("run backend") {
+            //steps {
+               // echo 'executing gradle...'
                 //withGradle() {
                     //sh 'gradle wrapper --gradle-version  6.9.1'
-                sh './gradlew -v'
-                echo '${?}'
+                //sh './gradlew -v'
+                //echo '${?}'
                 //}
-            }
-        }
+           // }
+        //}
     }
 
 

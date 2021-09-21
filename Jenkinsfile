@@ -41,7 +41,7 @@ pipeline {
             steps {
                 echo 'building the application ..'
                 //echo "building the application version ${NEW_VERSION}"
-                sh "mvn install" //possible only if the tool maven is defined in tools 
+                //sh "mvn install" //possible only if the tool maven is defined in tools 
 
                 script {
                     gv.buildApp()
